@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "./bin/dev"
+  },
+  "dependencies": {
+    "flowbite": "^1.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
