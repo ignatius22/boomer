@@ -1,0 +1,62 @@
+@import "font-awesome";
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #CCCCCC;
+}
+
+.reg {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-y: hidden;
+  overflow: hidden;
+
+}
+.spacer {
+  height: 200px;
+}
+
+.input {
+  width: 100%;
+  border: none;
+}
+
+.hand{
+   background-color: #FFFFFF;
+}
+.txt-color{
+   color:#121843 
+}
+
+
+@media only screen and (max-width: 770px) {
+  .reg {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hand {
+    width: 80%;
+    
+  }
+
+  .input {
+    width: 100%;
+    border: none;
+  }
+  .spacer {
+   height: 50px;
+ }
+ .moveup{
+   position:absolute;
+   top: 50%;
+   color: red;
+ }
+}
+
+@media only screen and (min-width: 771px) and (max-width: 1040px) {
+  //TABLET ONLY STYLES
+}

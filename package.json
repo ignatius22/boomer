@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "./bin/dev"
+    "start": "rails tailwindcss:watch"
   },
   "dependencies": {
     "flowbite": "^1.7.0"

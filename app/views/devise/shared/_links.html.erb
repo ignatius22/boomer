@@ -1,13 +1,13 @@
 <%- if controller_name != 'sessions' %>
- <span class="text-sm text-slate-400">already a user? </span> <%= link_to "Log in", new_session_path(resource_name), class:'text-sm text-slat-500' %><br />
+ <span class="text-sm text-slate-400 font-light">already a user? </span> <%= link_to "Log in", new_session_path(resource_name), class:'text-sm text-slat-500 font-bold text-blue-500' %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
- <span class="text-sm text-slate-400">don't have an account? </span> <%= link_to "Sign up", new_registration_path(resource_name), class:'text-sm' %><br />
+ <span class="text-sm text-slate-400 font-light">don't have an account? </span> <%= link_to "Sign up", new_registration_path(resource_name), class:'text-sm text-blue-400 underline-offset-0 font-bold' %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name), class:'text-sm text-slate-400'%><br />
+  <%= link_to "Forgot your password?", new_password_path(resource_name), class:'text-sm text-blue-600 font-light underline '%><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
