@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
 
-    def index
-        @welcome = "Welcome to the Home Page"
-    end
-    
+  def index
+    @welcome = 'Introducing the ExquisiteEvo Boomer - Unleash the Power of Elegance'
+  end
 end
