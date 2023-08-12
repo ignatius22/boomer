@@ -1,4 +1,78 @@
-<div>
-  <h1 class="font-bold text-4xl">Posts#index</h1>
-  <p>Find me in app/views/posts/index.html.erb</p>
+
+<div class="flex justify-between items-center">
+  <div class=" w-1/6 left-hand-side border-r-2 ">
+    <div class="flex-col h-full justify-between ">
+      <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
+        <div class="h-1/6">
+          <%= link_to "Create", new_post_path, data: { turbo_frame: "modal" }  %>
+        </div>
+        <div class="h-1/6">
+          Explore
+        </div>
+        <div class="h-1/6">
+          Search
+        </div>
+        <div class="h-1/6">
+          Messages
+        </div>
+        <div class="h-1/6">
+          Notification
+        </div>
+        <div class="h-1/6">
+          Profile
+        </div>
+      </div>
+      <div class="border w-full text-center p-2" style="position:absolute; top:95%">
+        Menu
+      </div>
+    </div>
+  </div>
+
+  <div class="flex w-5/6 justify-between">
+    <div class="flex w-full">
+      <div class="flex-col" style="margin-left: 40%;">
+        <div class="flex border  p-5 mt-20">
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+
+
+
+        </div>
+
+        
+        <div class="flex-col" style="margin-top:10%;">
+          <% @posts.each do |post| %>
+          <a href="<%= post_path(post) %>">
+            <div class="flex items-center">
+                <div class="rounded-full bg-slate-200 w-20 h-20"></div>
+                <div class="pl-2">author's name</div>
+            </div>
+            <div class="border p-4 my-5" style="height: 500px; width:100%;">
+              <h1><%= post.title %></h1>
+              <p><%= post.description %></p>
+              <%= image_tag post.photo,class: "w-fit"  if post.photo.attached? %>
+            </div>
+          
+          <% end %>
+        </div>
+        </a>
+
+      </div>
+    </div>
+    <div class="w-1/4 justify-self-center text-center mt-20">
+      <div class="flex items-center justify-around">
+        <div class="flex items-center">
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+          <div>some text</div>
+        </div>
+          <div>some text</div>
+      </div>
+    </div>
+  </div>
 </div>
+         
+ 

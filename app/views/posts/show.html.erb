@@ -1,0 +1,33 @@
+<div class="flex justify-between">
+  <div class=" w-1/6 left-hand-side border-r-2">Left hand side</div>
+  <div class="flex w-5/6 justify-between">
+      <div class="flex-col mt-20" style="margin-left: 25%; height: 500px; width:100%;">
+        <div class="flex" style=" height: 500px; width:100%;">
+            <div class="border p-4 " style="width:500px" >
+              <h1><%= @post.title %></h1>
+              <p><%= @post.description %></p>
+              <div class="h-2/6 w-fit">
+                 <%= image_tag @post.photo if @post.photo.attached?  %>
+              </div>
+
+            </div>
+            <div class="border" style="width:350px">
+                
+            </div>
+        </div>
+
+        <div class="mt-10 border-b" style="width: 850px;"></div>
+    
+        <div class="flex flex-wrap justify-between mt-20" style="width: 850px;">
+           <div class="border" style="width:280px; height:300px">1</div>
+           <div class="border" style="width:280px; height:300px">2</div>
+           <div class="border" style="width:280px; height:300px">3</div>
+           <div class="border" style="width:280px; height:300px">1</div>
+           <div class="border" style="width:280px; height:300px">2</div>
+           <div class="border" style="width:280px; height:300px">3</div>
+        </div>
+      </div>
+    <div class="w-1/4 justify-self-center text-center">
+    </div>
+  </div>
+</div>

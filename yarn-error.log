@@ -1,0 +1,37 @@
+Arguments: 
+  /Users/iggy/.nvm/versions/node/v20.2.0/bin/node /usr/local/Cellar/yarn/1.22.19/libexec/bin/yarn.js add @hotwired/turbo-rails
+
+PATH: 
+  /Users/iggy/.rvm/gems/ruby-3.1.2/bin:/opt/homebrew/opt/openssl@1.0/bin:/opt/homebrew/opt/ruby/bin:/Users/iggy/.rvm/gems/ruby-3.1.2@global/bin:/Users/iggy/.rvm/rubies/ruby-3.1.2/bin:/Users/iggy/.rvm/bin:/Users/iggy/.nvm/versions/node/v20.2.0/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/iggy/Library/Android/sdk/emulator:/Users/iggy/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.2.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:118:26)
+
+npm manifest: 
+  {
+    "scripts": {
+      "start": "rails tailwindcss:watch"
+    },
+    "dependencies": {
+      "flowbite": "^1.7.0"
+    },
+    "devDependencies": {
+      "nodemon": "^3.0.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

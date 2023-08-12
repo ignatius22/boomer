@@ -3,23 +3,18 @@
   <head>
     <title>Boomers</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-      <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
   </head>
 
   <body>
-  <div class="animate__backInLeft" style="position:absolute; top:15%; left:39.5%;">
-      <p class="alert text-red-500 font-light "><%= alert %></p><br>
-  </div>
-   <%= yield %>
-        <p class="notice animate__backInLeft"><%= notice %></p>
-   
+    <div class="animate__backInLeft" style="position:absolute; top:15%; left:39.5%;">
+        <p class="alert text-red-500 font-light "><%= alert %></p><br>
+    </div>
+    <%= turbo_frame_tag "modal" %>
+    <%= yield %>
+    <p class="notice animate__backInLeft"><%= notice %></p>
   </body>
 </html>

@@ -3,6 +3,7 @@
     "start": "rails tailwindcss:watch"
   },
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.3.0",
     "flowbite": "^1.7.0"
   },
   "devDependencies": {
