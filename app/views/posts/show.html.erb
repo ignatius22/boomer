@@ -1,33 +1,77 @@
-<div class="flex justify-between">
-  <div class=" w-1/6 left-hand-side border-r-2">Left hand side</div>
-  <div class="flex w-5/6 justify-between">
-      <div class="flex-col mt-20" style="margin-left: 25%; height: 500px; width:100%;">
-        <div class="flex" style=" height: 500px; width:100%;">
-            <div class="border p-4 " style="width:500px" >
-              <h1><%= @post.title %></h1>
-              <p><%= @post.description %></p>
-              <div class="h-2/6 w-fit">
-                 <%= image_tag @post.photo if @post.photo.attached?  %>
-              </div>
-
-            </div>
-            <div class="border" style="width:350px">
-                
-            </div>
+<div class="flex justify-between ">
+  <div class=" w-1/6 left-hand-side border-r-2">
+      <div class="flex-col h-full justify-between ">
+      <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
+        <div class="h-1/6">
+          <%= link_to "Create", new_user_post_path(current_user) %>
         </div>
-
-        <div class="mt-10 border-b" style="width: 850px;"></div>
-    
-        <div class="flex flex-wrap justify-between mt-20" style="width: 850px;">
-           <div class="border" style="width:280px; height:300px">1</div>
-           <div class="border" style="width:280px; height:300px">2</div>
-           <div class="border" style="width:280px; height:300px">3</div>
-           <div class="border" style="width:280px; height:300px">1</div>
-           <div class="border" style="width:280px; height:300px">2</div>
-           <div class="border" style="width:280px; height:300px">3</div>
+        <div class="h-1/6">
+          Explore
+        </div>
+        <div class="h-1/6">
+          Search
+        </div>
+        <div class="h-1/6">
+          Messages
+        </div>
+        <div class="h-1/6">
+          Notification
+        </div>
+        <div class="h-1/6">
+          Profile
         </div>
       </div>
-    <div class="w-1/4 justify-self-center text-center">
+      <div class="border w-full text-center p-2" style="position:absolute; top:95%">
+        Menu
+      </div>
     </div>
+  </div>
+
+  <div class="flex w-5/6 justify-between main-content">
+   
+        <div class="flex-col mt-20" style="margin-left: 25%; height: 500px; width:100%;">
+          <div class="flex" style=" height: 500px; width:100%;">
+              <div class="border p-4 " style="width:500px" >
+                <h1><%= @post.title %></h1>
+                <p><%= @post.description %></p>
+                <div class="h-2/6 w-fit">
+                  <%= image_tag @post.photo, class:"w-52" if @post.photo.attached?  %>
+                </div>
+
+              </div>
+              <div class="border" style="width:350px">
+            
+              </div>
+          </div>
+
+          <div class="mt-10 border-b" style="width: 850px;"></div>
+          <div class="mt-10 text-2xl"> <h2>Other Posts by <%= @user.email %>:</h2></div>
+      <% if @other_posts.any? %>
+          <div class="flex flex-wrap justify-between mt-20" style="width: 850px; height:100%;">
+              <% @other_posts.each do |other_post| %> 
+                <div class="border" style="width:280px; height:300px">
+                 <h2>Author: <%= @user.email %>:</h2>
+                  <p>Created on: <%= @post.created_at.strftime("%B %d, %Y") %></p>    
+                  <h1><%= other_post.title %></h1>
+                  <p><%= other_post.description %></p>
+                  <%= image_tag other_post.photo,class: "h-3/5 w-full"  if other_post.photo.attached? %>
+                </div>
+              <% end %>
+          </div>
+      <% else %>
+          <p>No other posts from <%= @user.email %> yet.</p>
+      <% end %>
+        </div>
+
+
+      <div class="w-1/4 justify-self-center text-center">
+        <p>Posted by: <%= link_to @user.email, user_path(@user) %></p>
+        <p>Posted on: <%= @post.created_at.strftime("%B %d, %Y") %></p>
+        <ul>
+          <% @other_posts.each do |other_post| %>
+            <li><%= link_to other_post.title, post_path(other_post) %></li>
+          <% end %>
+        </ul>
+      </div>
   </div>
 </div>

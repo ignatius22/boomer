@@ -4,7 +4,7 @@
     <div class="flex-col h-full justify-between ">
       <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
         <div class="h-1/6">
-          <%= link_to "Create", new_user_post_path(@user), data: { turbo_frame: "modal" }  %>
+          <%= link_to "Create", new_user_post_path(current_user) %>
         </div>
         <div class="h-1/6">
           Explore
@@ -30,36 +30,32 @@
 
   <div class="flex w-5/6 justify-between">
     <div class="flex w-full">
-      <div class="flex-col" style="margin-left: 40%;">
-        <div class="flex border  p-5 mt-20">
+      <div class="flex-col" style="margin-left: 30%;">
+        <div class="flex border  p-5 mt-20" style="width: 85%;">
           <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
           <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
           <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
           <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
           <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
           <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
-
-
-
         </div>
-
         
-        <div class="flex-col" style="margin-top:10%;">
+        <div class="flex-col" style="margin-top:10%; width:85%;">
           <% @posts.each do |post| %>
-          <a href="<%= post_path(post) %>">
-            <div class="flex items-center">
+          
+            <div class="flex items-center ">
                 <div class="rounded-full bg-slate-200 w-20 h-20"></div>
-                <div class="pl-2">author's name</div>
+                <div class="pl-2"><%=post.user.email %> </div>
             </div>
             <div class="border p-4 my-5" style="height: 500px; width:100%;">
               <h1><%= post.title %></h1>
               <p><%= post.description %></p>
-              <%= image_tag post.photo,class: "w-fit"  if post.photo.attached? %>
+              <%= image_tag post.photo,class: "h-4/5 w-full"  if post.photo.attached? %>
             </div>
           
           <% end %>
         </div>
-        </a>
+      
 
       </div>
     </div>

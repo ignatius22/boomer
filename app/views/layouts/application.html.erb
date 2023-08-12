@@ -13,8 +13,9 @@
     <div class="animate__backInLeft" style="position:absolute; top:15%; left:39.5%;">
         <p class="alert text-red-500 font-light "><%= alert %></p><br>
     </div>
+    <p class="notice animate__backInLeft"><%= notice %></p>
     <%= turbo_frame_tag "modal" %>
     <%= yield %>
-    <p class="notice animate__backInLeft"><%= notice %></p>
+    
   </body>
 </html>

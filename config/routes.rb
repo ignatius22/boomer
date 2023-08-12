@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resources :users do
-    resources :posts, except: [:show, :index]
+    resources :posts
   end
 
-  resources :posts, only: [:show, :index] do
+  resources :posts, only: [:show, :index, :create] do
     resources :comments
   end
 end
