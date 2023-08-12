@@ -4,7 +4,7 @@
     <div class="flex-col h-full justify-between ">
       <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
         <div class="h-1/6">
-          <%= link_to "Create", new_post_path, data: { turbo_frame: "modal" }  %>
+          <%= link_to "Create", new_user_post_path(@user), data: { turbo_frame: "modal" }  %>
         </div>
         <div class="h-1/6">
           Explore
