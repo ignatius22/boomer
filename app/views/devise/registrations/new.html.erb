@@ -10,7 +10,28 @@
         <%= f.label :email,  class:'text-sm text-slate-600 font-light' %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'input bg-slate-50' %>
       </div>
-
+      <div class="field py-4">
+        <%= f.label :first_name, class:'text-sm text-slate-600 font-light' %><br />
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class:'input bg-slate-50' %>
+      </div>
+       
+      <div class="field py-4">
+        <%= f.label :last_name, class:'text-sm text-slate-600 font-light' %><br />
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class:'input bg-slate-50' %> 
+      </div>
+  
+      <div>
+        <%= f.label :username, class:'text-sm text-slate-600 font-light' %><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", class:'input bg-slate-50' %> 
+      </div>
+      <div>
+        <%= f.label :bio, class:'text-sm text-slate-600 font-light' %><br />
+        <%= f.text_field :bio, autofocus: true, autocomplete: "bio", class:'input bg-slate-50' %>
+      </div>
+      <div class="field py-4">
+        <%= f.label :profile_photo %>
+        <%= f.file_field :profile_photo, class: 'input bg-slate-50' %>
+      </div>
       <div class="field py-2">
         <%= f.label :password, class:'text-sm text-slate-600 font-light'  %>
         <% if @minimum_password_length %>

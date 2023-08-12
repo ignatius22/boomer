@@ -19,11 +19,11 @@
           Notification
         </div>
         <div class="h-1/6">
-          Profile
+          <%= link_to 'Profile', user_path(current_user) %>
         </div>
       </div>
       <div class="border w-full text-center p-2" style="position:absolute; top:95%">
-        Menu
+        <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
           
             <div class="flex items-center ">
                 <div class="rounded-full bg-slate-200 w-20 h-20"></div>
-                <div class="pl-2"><%=post.user.email %> </div>
+                <div class="pl-2"><%=post.user.username %> </div>
             </div>
             <div class="border p-4 my-5" style="height: 500px; width:100%;">
               <h1><%= post.title %></h1>
@@ -62,8 +62,10 @@
     <div class="w-1/4 justify-self-center text-center mt-20">
       <div class="flex items-center justify-around">
         <div class="flex items-center">
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
-          <div>some text</div>
+          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4">
+            <%= image_tag current_user.profile_photo, class: "h-full w-full rounded-full" if current_user.profile_photo.attached? %>
+          </div>
+          <div class="pl-2"><%=current_user.username %> </div>
         </div>
           <div>some text</div>
       </div>
