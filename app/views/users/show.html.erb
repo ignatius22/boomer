@@ -7,7 +7,7 @@
           <%= link_to "Create", new_user_post_path(current_user) %>
         </div>
         <div class="h-1/6">
-          Explore
+           <%= link_to 'Home', posts_path %>
         </div>
         <div class="h-1/6">
           Search
@@ -19,11 +19,11 @@
           Notification
         </div>
         <div class="h-1/6">
-          Profile
+          <%= link_to 'Profile', user_path(current_user) %>
         </div>
       </div>
       <div class="border w-full text-center p-2" style="position:absolute; top:95%">
-        <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+          <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
   <div class="flex w-5/6 justify-between main-content">
     <div class="flex w-full">
       <div class="flex-col" style="margin-left: 30%; width:85%;">
-        <div class="flex items-center border  p-5 mt-20" style="width: 90%;">
+        <div class="flex items-center  p-5 mt-20" style="width: 90%;">
           <div class="rounded-full bg-slate-200" style="height: 200px; width:200px; ">
             <%= image_tag current_user.profile_photo, class: "h-full w-full rounded-full" if current_user.profile_photo.attached? %>
           </div>
@@ -54,8 +54,8 @@
         
           <div class="flex flex-wrap justify-between mt-10" style="width: 850px;">
               <% @posts.each do |post| %> 
-                <div class="border mt-2" style="width:280px; height:300px">
-                 <h2>Author: <%= current_user.email %>:</h2>
+                <div class="border mt-2 p-3" style="width:280px; height:300px">
+                 <h2>Author: <%= current_user.username %>:</h2>
                   <p>Created on: <%= post.created_at.strftime("%B %d, %Y") %></p>    
                   <h1><%= post.title %></h1>
                   <p><%= post.description %></p>
