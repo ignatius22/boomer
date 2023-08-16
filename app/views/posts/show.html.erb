@@ -18,11 +18,16 @@
                   <%= image_tag @user.profile_photo, class: "w-9 h-9 rounded-full" if @user.profile_photo.attached? %>
                   <span class="text-sm font-bold ml-2"><%= @user.username %></span>
                 </div>
-                <%= turbo_frame_tag "post_modal" do %>
-                <%= link_to edit_user_post_path(user_id: @post.user, id: @post) do %>
-                    <%= icon('fa-solid', 'ellipsis', class: 'icon')%>
+                
+                <% if @user.id == current_user.id %>
+                  <%= turbo_frame_tag "post_modal" do %>
+                    <%= link_to edit_user_post_path(user_id: @post.user, id: @post) do %>
+                        <%= icon('fa-solid', 'ellipsis', class: 'icon')%>
+                    <%end%>
                   <%end%>
-                <%end%>
+                <% end %>
+                
+
               </div>
               
                <div class="comment">
