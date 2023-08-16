@@ -1,0 +1,40 @@
+  <div class=" w-1/6 left-hand-side border-r-2">
+      <div class="flex-col h-full justify-between ">
+      <div class="mx-10 my-10 ">
+        <%= link_to 'Boomer', posts_path, class:"text-2xl font-bold tracking-widest" %>
+      </div>
+      <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
+        <div class="h-1/6 flex items-center">
+          <%= icon('fa-solid', 'pen-to-square', class: 'icon')%>
+          <%= turbo_frame_tag "post_modal" do %>
+            <%= link_to "Create", new_user_post_path(current_user), class:"text-sm ml-3" %>
+          <% end %>
+        </div>
+        <div class="h-1/6 flex items-center">
+           <%= icon('fa-solid', 'house', class: 'icon')%>
+           <%= link_to 'Home', posts_path, class:"text-sm ml-3" %>
+        </div>
+        <div class="h-1/6 flex items-center">
+          <%= icon('fa-solid', 'magnifying-glass', class: 'icon')%>
+          <p class="text-sm ml-3">Search</p>
+        </div>
+        <div class="h-1/6 flex items-center">
+          <%= icon('fa-solid', 'envelope', class: 'icon')%>
+          <p class="text-sm ml-3">Messages</p>
+          
+        </div>
+        <div class="flex h-1/6 items-center">
+          <%= icon('fa-solid', 'heart', class: 'icon')%>
+          <p class="text-sm ml-3">Notification</p>
+        </div>
+        <div class="flex h-1/6 items-center">
+          <%= image_tag current_user.profile_photo, class: "h-8 w-8 rounded-full" if current_user.profile_photo.attached? %>
+          <%= link_to 'Profile', user_path(current_user), class:'text-sm ml-3' %>
+        </div>
+      </div>
+      <div class="w-full text-center p-2 flex justify-around" style="position:absolute; top:95%">
+          <%= icon('fa-solid','right-from-bracket', class: 'icon')%>
+          <%= button_to "Log Out", destroy_user_session_path, method: :delete, class:"ml-3 font-sm" %>
+      </div>
+    </div>
+  </div>

@@ -10,7 +10,12 @@ module Boomers
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-
+    config.action_controller.perform_caching = false
+    config.public_file_server.headers = {
+      'Cache-Control' => 'no-cache, no-store',
+      'Pragma' => 'no-cache',
+      'Expires' => 'Tues, 14 Oct 2023 00:00:00 GMT'
+    }
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

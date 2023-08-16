@@ -1,0 +1,4 @@
+en:
+  time:
+    formats:
+      custom: "%{count} m"

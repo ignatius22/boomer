@@ -1,13 +1,20 @@
-<%= form_with model: [ @post, @post.comments.build ] do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-  </p>
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
+<%= form_with model: [ @post, @post.comments.build ], html: { class: '' } do |form| %>
+
+<div class="w-full">
+  <div class="">
+    <%= form.text_area :body, class: "custom-text-area", placeholder:"Add comment" %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const commentBody = document.getElementById('comment_body');
+    commentBody.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault(); // Prevent new line
+        commentBody.form.submit(); // Submit the form
+      }
+    });
+  });
+</script>
 <% end %>

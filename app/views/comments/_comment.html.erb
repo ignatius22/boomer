@@ -1,0 +1,13 @@
+
+<div class="comment" style="height: 20%;">
+  <div class="flex p-5">
+    <div class="">
+        <%= image_tag comment.user.profile_photo, class: "w-12 h-12 rounded-full" if comment.user.profile_photo.attached? %>
+    </div>
+    <div class="flex-col ml-2">
+        <span class="text-sm font-bold"><%= comment.user.username %></span>
+        <span class="text-sm ml-3"><%= comment.body %> </span>
+       <p class="text-xs text-slate-400"><%= time_ago_in_words(comment.created_at).gsub("minutes", "m").gsub("hours", "h") %> ago</p>
+    </div>
+  </div>
+</div>

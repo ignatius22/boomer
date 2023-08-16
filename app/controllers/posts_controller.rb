@@ -4,6 +4,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @users = User.all
+    @post = current_user.posts.build
   end
 
   def show
@@ -25,6 +27,25 @@ class PostsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.redirect(user_post_path(@post.user, @post)) 
+      end
+      redirect_to user_post_path(@post.user, @post), notice: 'Post was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+
+
 
   private
 

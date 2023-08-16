@@ -1,81 +1,105 @@
 
 <div class="flex justify-between items-center">
-  <div class=" w-1/6 left-hand-side border-r-2 ">
-    <div class="flex-col h-full justify-between ">
-      <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
-        <div class="h-1/6">
-          <%= link_to "Create", new_user_post_path(current_user) %>
-        </div>
-        <div class="h-1/6">
-          <%= link_to 'Home', posts_path %>
-        </div>
-        <div class="h-1/6">
-          Search
-        </div>
-        <div class="h-1/6">
-          Messages
-        </div>
-        <div class="h-1/6">
-          Notification
-        </div>
-        <div class="h-1/6">
-          <%= link_to 'Profile', user_path(current_user) %>
-        </div>
-      </div>
-      <div class="border w-full text-center p-2" style="position:absolute; top:95%">
-        <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'sidebar' %>
 
   <div class="flex w-5/6 justify-between">
     <div class="flex w-full">
       <div class="flex-col" style="margin-left: 30%;">
-        <div class="flex border  p-5 mt-20" style="width: 85%;">
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4"></div>
+      <div class="border p-5 mt-20" style="width: 85%;">
+        <div class="flex justify-between items-center " style="width: 25%;">
+         <% @users.each do |user| %>
+         <a href="/users/<%= user.id %>">
+         <div class="flex-col items-center">
+          <div class="rounded-full bg-slate-200 w-16 h-16">
+            <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
+          </div>
+          <div class="text-center text-sm font-light"><%=user.username %></div>
+          </div>
+          </a>
+         <%end%>
         </div>
-        
+      </div>
 
         
         <div class="flex-col" style="margin-top:10%; width:85%;">
           <% @posts.each do |post| %>
-            <div class="flex items-center ">
-                <div class="rounded-full bg-slate-200 w-20 h-20">
-                  <%= image_tag post.user.profile_photo, class: "h-full w-full rounded-full" if post.user.profile_photo.attached? %>
+            <div class="flex justify-between items-center">
+              <%= link_to user_path(post.user), class:'text-sm ml-3' do %>
+                <div class="flex items-center">
+                    <div class="rounded-full bg-slate-200 h-14 w-14">
+                      <%= image_tag post.user.profile_photo, class: "h-14 w-14 rounded-full" if post.user.profile_photo.attached? %>
+                    </div>
+                  <div class="pl-2">
+                    <%=post.user.username %> 
+                  </div>
                 </div>
-         
-                <div class="pl-2"><%=post.user.username %> </div>
+              <% end %>
+                <div>
+                  <a href="/posts/<%= post.id %>">
+                   <%= icon('fa-solid', 'ellipsis', class: 'icon')%>
+                  </a>
+                </div>
             </div>
-          <a href="/posts/<%= post.id %>">
-            <div class="border p-4 my-5" style="height: 500px; width:100%;">
-              <h1><%= post.title %></h1>
-              <p><%= post.description %></p>
-              <%= image_tag post.photo,class: "h-4/5 w-full"  if post.photo.attached? %>
+  
+            <div class="border flex-col p-4 my-5" style="height: 500px; width:100%;">
+              <div class="">
+                <%= image_tag post.photo,class: "post-image  object-fill"  if post.photo.attached? %>
+              </div>
+
+              <div class="reactions">
+                <%= icon('fa-solid', 'comment', class: 'icon')%>
+                <%= icon('fa-solid', 'heart', class: 'icon heart')%>
+              </div>
+
+              <div>
+                <h1><%= post.title %></h1>
+                <p><%= post.description %></p>
+              </div>
+              
             </div>
-          </a>
           <% end %>
         </div>
       
 
       </div>
     </div>
-    <div class="w-1/4 justify-self-center text-center mt-20">
+    <div class="w-1/4 text-center mt-20">
       <div class="flex items-center justify-around">
         <div class="flex items-center">
-        <%= link_to user_path(current_user) do %>
-          <div class="rounded-full bg-slate-200 w-20 h-20 ml-4">
-            <%= image_tag current_user.profile_photo, class: "h-full w-full rounded-full" if current_user.profile_photo.attached? %>
-          </div>
-        <% end %>
-          <div class="pl-2"><%=current_user.username %> </div>
+          <%= link_to user_path(current_user) do %>
+            <div class="rounded-full bg-slate-200 w-12 h-12">
+              <%= image_tag current_user.profile_photo, class: "h-full w-full rounded-full" if current_user.profile_photo.attached? %>
+            </div>
+          <% end %>
+          <div class="pl-2 text-sm font-bold"><%=current_user.username %> </div>
         </div>
-          <div></div>
+        <div></div>
       </div>
+
+      <div class="flex items-center justify-around mt-10">
+         <div class="flex items-center">
+          <h1 class="text-sm text-slate-500">suggested for you</h1>
+         </div>
+         <p class="text-sm font-bold">View all</p>
+      </div>
+      
+      
+       <% @users.each do |user| %>
+       
+       <% if user.id != current_user.id %>
+         <div class="flex items-center justify-around mt-5">
+          <div class="flex items-center">
+            <div class="rounded-full bg-slate-200 w-12 h-12 ml-4">
+              <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
+            </div>
+            <div class="text-sm font-bold pl-2"><%=user.username %></div>
+          </div>
+          <div class="text-sm">follow</div>
+        </div>
+       <% end %>
+      <% end %>
+  
+
     </div>
   </div>
 </div>

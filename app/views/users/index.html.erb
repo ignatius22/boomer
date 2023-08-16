@@ -1,0 +1,13 @@
+        
+        <div class="flex-col" style="margin-top:10%; width:85%;">
+          <% @users.each do |user| %>
+            <div class="flex items-center ">
+                <div class="rounded-full bg-slate-200 w-20 h-20">
+                  <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
+                </div>
+         
+                <div class="pl-2"><%=user.username %> </div>
+            </div>
+
+          <% end %>
+        </div>

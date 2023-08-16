@@ -1,15 +1,24 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: [:create]
+  before_action :set_comment, only: [:edit, :update, :destroy]
+
   def create
-    @post = Post.find(params[:post_id])
-    @post = @post.comments.create(comment_params)
+    @comment = @post.comments.build(comment_params)
     @comment.user = current_user
-    redirect_to post_path(@post)
+
+    if @comment.save
+      redirect_to post_path(@post), notice: 'Comment was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
+
+  # Define edit, update, and destroy actions here if needed
 
   private
 
   def comment_params
-    params.require(:comment).permit(:commenter, :body)
+    params.require(:comment).permit(:body)
   end
 
   def set_post
@@ -17,10 +26,6 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = @post.comments.find(params[:id])
-  end
-
-  def comment_params
-    params.require(:comment).permit(:content)
+    @comment = Comment.find(params[:id])
   end
 end

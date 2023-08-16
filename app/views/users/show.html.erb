@@ -1,32 +1,6 @@
 
 <div class="flex justify-between">
-  <div class=" w-1/6 left-hand-side border-r-2 ">
-    <div class="flex-col h-full justify-between ">
-      <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
-        <div class="h-1/6">
-          <%= link_to "Create", new_user_post_path(current_user) %>
-        </div>
-        <div class="h-1/6">
-           <%= link_to 'Home', posts_path %>
-        </div>
-        <div class="h-1/6">
-          Search
-        </div>
-        <div class="h-1/6">
-          Messages
-        </div>
-        <div class="h-1/6">
-          Notification
-        </div>
-        <div class="h-1/6">
-          <%= link_to 'Profile', user_path(current_user) %>
-        </div>
-      </div>
-      <div class="border w-full text-center p-2" style="position:absolute; top:95%">
-          <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
-      </div>
-    </div>
-  </div>
+ <%= render partial: 'sidebar' %>
 
   <div class="flex w-5/6 justify-between main-content">
     <div class="flex w-full">
@@ -38,7 +12,7 @@
           <div class="flex-col ml-20">
             <div class="flex justify-between items-center">
               <h1 class="font-bold"><%= current_user.username %></h1>
-               <p class="ml-5 rounded bg-slate-200 py-1 px-2 font-bold"><%= link_to "Edit Profile", edit_user_path(current_user)%></p>
+               <p class="ml-5 rounded bg-slate-200 py-1 px-2 font-bold"><%= link_to "Edit Profile", edit_user_registration_path(current_user)%></p>
             </div>
             <div class="mt-5 flex">
                 <%= pluralize(current_user.posts.count, 'post') %>
@@ -55,7 +29,8 @@
           <div class="flex flex-wrap justify-between mt-10" style="width: 850px;">
               <% @posts.each do |post| %> 
                 <div class="border mt-2 p-3" style="width:280px; height:300px">
-                 <h2>Author: <%= current_user.username %>:</h2>
+                  <%= icon('fa-solid', 'ellipsis-vertical', class: 'icon')%>
+                 <h2>Author: <%= post.user.username %>:</h2>
                   <p>Created on: <%= post.created_at.strftime("%B %d, %Y") %></p>    
                   <h1><%= post.title %></h1>
                   <p><%= post.description %></p>
