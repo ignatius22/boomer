@@ -5,23 +5,33 @@
   <div class="flex w-5/6 justify-between main-content">
     <div class="flex w-full">
       <div class="flex-col" style="margin-left: 30%; width:85%;">
-        <div class="flex items-center  p-5 mt-20" style="width: 90%;">
+        <div class="flex items-center  p-5 mt-20" style="width: 80%;">
           <div class="rounded-full bg-slate-200" style="height: 200px; width:200px; ">
-            <%= image_tag current_user.profile_photo, class: "h-full w-full rounded-full" if current_user.profile_photo.attached? %>
+            <%= image_tag @user.profile_photo, class: "h-full w-full rounded-full" if @user.profile_photo.attached? %>
           </div>
           <div class="flex-col ml-20">
-            <div class="flex justify-between items-center">
-              <h1 class="font-bold"><%= current_user.username %></h1>
-               <p class="ml-5 rounded bg-slate-200 py-1 px-2 font-bold"><%= link_to "Edit Profile", edit_user_registration_path(current_user)%></p>
+            <div class="flex items-center">
+              <h1 class="font-bold"><%= @user.username %></h1>
+              
+              <% if @user.id == current_user.id %>
+                <p class="ml-5 rounded bg-slate-200 py-1 px-2 font-bold">
+                  <%= link_to "Edit Profile", edit_user_registration_path(@user)%>
+                </p>
+               <% else %>
+                <p class="ml-5 rounded bg-slate-200 py-1 px-2 font-bold">
+                  <%= link_to "Follow"%>
+               </p>
+              <% end %>
+
             </div>
             <div class="mt-5 flex">
-                <%= pluralize(current_user.posts.count, 'post') %>
+                <%= pluralize(@user.posts.count, 'post') %>
                 <p class="ml-5"><strong class="mr-1">0</strong>followers</p>
                 <p class="ml-5"><strong class="mr-1">0</strong>following</p>
             </div>
             <div class="mt-5">
-              <h1 class="font-bold"><%= current_user.first_name %> <%= current_user.last_name %></h1>
-              <p class="font-light"><%= current_user.bio %></p>
+              <h1 class="font-bold"><%= @user.first_name %> <%= @user.last_name %></h1>
+              <p class="font-light"><%= @user.bio %></p>
             </div>
           </div>
         </div>

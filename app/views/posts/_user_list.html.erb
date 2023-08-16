@@ -1,0 +1,16 @@
+<div class="border p-5 mt-20" style="width: 85%;">
+  <div class="flex justify-between items-center" style="width: 25%;">
+    <% @users.each do |user| %>
+      <% if user.id != current_user.id %>
+        <%= link_to user_path(user.id)  do  %>
+          <div class="flex-col items-center">
+            <div class="rounded-full bg-slate-200 w-16 h-16">
+              <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
+            </div>
+            <div class="text-center text-sm font-light"><%= user.username %></div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
