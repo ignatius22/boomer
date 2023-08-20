@@ -8,19 +8,22 @@
       <div class="border p-5 mt-20" style="width: 85%;">
         <div class="flex justify-between items-center " style="width: 25%;">
          <% @users.each do |user| %>
-          <% if user.id != current_user.id %>
-              <%= link_to user_path(user.id)  do  %>
-                <div class="flex-col items-center">
-                  <div class="rounded-full bg-slate-200 w-16 h-16">
-                    <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
-                  </div>
-                  <div class="text-center text-sm font-light"><%=user.username %></div>
+            <% if user.id != current_user.id %>
+                <%= link_to user_path(user.id)  do  %>
+                  <div class="flex-col items-center">
+                      <% if current_user.following?(user) %>
+                        <div class="rounded-full bg-slate-200 w-16 h-16">
+                          <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
+                        </div>
+                        <div class="text-center text-sm font-light"><%=user.username %></div>
+                      <% end %>
                   </div>
                 <%end%>
-          <% end %>
+            <% end %>
          <%end%>
         </div>
       </div>
+    
 
         
         <div class="flex-col" style="margin-top:10%; width:85%;">
@@ -37,25 +40,29 @@
                 </div>
               <% end %>
                 <div>
-                  <a href="/posts/<%= post.id %>">
-                   <%= icon('fa-solid', 'ellipsis', class: 'icon')%>
-                  </a>
+                  <%= turbo_frame_tag "post_modal" do %>
+                    <a href="/posts/<%= post.id %>">
+                    <%= icon('fa-solid', 'ellipsis', class: 'icon')%>
+                    </a>
+                  <% end %>
                 </div>
             </div>
   
-            <div class="border flex-col p-4 my-5" style="height: 500px; width:100%;">
+            <div class="border flex-col p-5 my-5" style="height: 100%; width:100%;">
               <div class="">
                 <%= image_tag post.photo,class: "post-image  object-fill"  if post.photo.attached? %>
               </div>
 
               <div class="reactions">
-                <%= icon('fa-solid', 'comment', class: 'icon')%>
+                <a href="/posts/<%= post.id %>">
+                  <%= icon('fa-solid', 'comment', class: 'icon')%>
+                </a>
                 <%= icon('fa-solid', 'heart', class: 'icon heart')%>
               </div>
 
-              <div>
-                <h1><%= post.title %></h1>
-                <p><%= post.description %></p>
+              <div class="mt-2">
+                <h1 class="font-bold text-sm"><%= post.title %></h1>
+                <p class="font-light text-sm"><%= post.description %></p>
               </div>
               
             </div>
@@ -66,7 +73,7 @@
       </div>
     </div>
     <div class="w-1/4 text-center mt-20">
-      <div class="flex items-center justify-around">
+      <div class="flex items-center justify-between">
         <div class="flex items-center">
           <%= link_to user_path(current_user) do %>
             <div class="rounded-full bg-slate-200 w-12 h-12">
@@ -78,32 +85,71 @@
         <div></div>
       </div>
 
-      <div class="flex items-center justify-around mt-10">
-         <div class="flex items-center">
+      <div class="flex-col p-2 border justify-around mt-10" style="width: 90%; height:10%">
+         <div class="flex justify-between"  style="width: 95%; margin-left:2.5%">
           <h1 class="text-sm text-slate-500">suggested for you</h1>
+          <p class="text-sm font-bold">View all</p>
          </div>
-         <p class="text-sm font-bold">View all</p>
+         
+         <div style="width: 98%;">
+            <% @users.each do |user| %>
+              <% if user.id != current_user.id && !current_user.following?(user) %>
+                <div class="flex items-center justify-between mt-5" style="width: 98%; margin-right:1%">
+                  <div class="flex items-center">
+                    <div class="rounded-full bg-slate-200 w-12 h-12 ml-4">
+                      <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
+                    </div>
+                    <div class="text-sm font-bold pl-2"><%=user.username %></div>
+                  </div>
+                    <%= button_to "Follow",  follow_path(user), class:"bg-green-300 text-white font-light text-xs rounded w-16 h-8 p-1" %>
+                </div>
+              <% end %>
+            <% end %>
+         </div>
+         
       </div>
       
-      
-       <% @users.each do |user| %>
-       
-       <% if user.id != current_user.id %>
-         <div class="flex items-center justify-around mt-5">
-          <div class="flex items-center">
-            <div class="rounded-full bg-slate-200 w-12 h-12 ml-4">
-              <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
-            </div>
-            <div class="text-sm font-bold pl-2"><%=user.username %></div>
-          </div>
-          <div class="text-sm">follow</div>
-        </div>
-       <% end %>
-      <% end %>
-  
+      <div class="flex-col p-2 border justify-around mt-10" style="width: 90%; height:10%">
+         <div class="flex justify-between"  style="width: 95%; margin-right:2.5%">
+          <h1 class="text-sm text-slate-500">Friends you follow</h1>
+          <p class="text-sm font-bold">View all</p>
+         </div>
+         
+         <div style="width: 98%;">
+              <% current_user.followers.each do |user| %>
+                <div class="flex items-center justify-between mt-5" style="width: 98%; margin-right:1%">
+                  <div class="flex items-center">
+                    <div class="rounded-full bg-slate-200 w-12 h-12 ml-4">
+                      <%= image_tag user.profile_photo, class: "h-full w-full rounded-full" if user.profile_photo.attached? %>
+                    </div>
+                    <div class="text-sm font-bold pl-2"><%=user.username %></div>
+                  </div>
+                    <%= button_to "Unfollow",  unfollow_path(user), class:"bg-red-300 text-white font-light text-xs rounded w-16 h-8 p-1" %>
+                </div>
+              <% end %>
+         </div>
+         
+      </div>
 
+
+
+
+  
+    <% current_user.follow_requests.each do |request| %>
+      <div class="border mt-10 w-3/4 p-3 flex-col ml-12">
+        <div class="flex items-center">
+          <%= image_tag request.followerable.profile_photo, class: "h-12 w-12 rounded-full" if request.followerable.profile_photo.attached? %>
+          <p class="text-xs font-light text-left"><strong><%= request.followerable.username %></strong> wants to follow you</p>
+        </div>
+        <div class="flex items-center mt-2">
+          <%= button_to "Accept", accept_path(request.followerable), class:"bg-green-300 text-white font-light font-xs rounded w-16 h-8 p-1" %>
+          <%= button_to "Decline", decline_path(request.followerable), class:"bg-red-300 text-white font-light fonts-xs rounded w-16 h-8 p-1 ml-4" %>
+        </div>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>
-         
- 
+
+
+

@@ -1,18 +1,17 @@
 <%= turbo_page_requires_reload %>
 <div class="flex justify-between ">
-<%= render partial: 'sidebar' %>
+ <%= render partial: 'sidebar' %>
   <div class="flex w-5/6 justify-between main-content">
-        <div class="flex-col mt-20" style="margin-left: 25%; height: 500px; width:100%;">
-          <div class="flex" style=" height: 500px; width:100%;">
+        <div class="flex-col mt-20" style="margin-left: 25%; height: 47%; width:100%;">
+          <div class="flex" style=" height: 100%; width:100%;">
               <div class="border p-4 " style="width:500px" >
-                <h1><%= @post.title %></h1>
-                <p><%= @post.description %></p>
                 <div class="">
                   <%= image_tag @post.photo, class:"showpost" if @post.photo.attached?  %>
                 </div>
-
+                <h1 class="text-sm font-bold"><%= @post.title %></h1>
+                <p class="text-sm font-light"><%= @post.description %></p>
               </div>
-              <div class="border" style="width:350px; height:42vh">
+              <div class="border" style="width:350px; height:92%">
               <div class="flex justify-between items-center border-b p-1">
                 <div class="flex items-center ">
                   <%= image_tag @user.profile_photo, class: "w-9 h-9 rounded-full" if @user.profile_photo.attached? %>
@@ -49,10 +48,10 @@
               <% @other_posts.each do |other_post| %> 
               <a href="/posts/<%= other_post.id %>">
                 <div class="border" style="width:280px; height:300px">
-                 <h2>Author: <%= other_post.user.username %>:</h2>
-                  <p>Created on: <%= @post.created_at.strftime("%B %d, %Y") %></p>    
-                  <h1><%= other_post.title %></h1>
-                  <p><%= other_post.description %></p>
+                 <h2 class="font-bold text-xs"><%= other_post.user.username %>:</h2>
+                  <p class="font-light text-xs">Created on: <%= @post.created_at.strftime("%B %d, %Y") %></p>    
+                  <h1 class="font-bold text-sm"><%= other_post.title %></h1>
+                  <p class="font-light text-sm"><%= other_post.description %></p>
                   <%= image_tag other_post.photo, class: "h-3/5 w-full"  if other_post.photo.attached? %>
                 </div>
               </a>
@@ -65,8 +64,8 @@
 
 
       <div class="w-1/4 justify-self-center text-center">
-        <p>Posted by: <%= link_to @user.username, user_path(@user) %></p>
-        <p>Posted on: <%= @post.created_at.strftime("%B %d, %Y") %></p>
+        <p class="text-xs font-light text-slate-300">Posted by: <%= link_to @user.username, user_path(@user) %></p>
+        <p class="text-xs font-light text-slate-300">Posted on: <%= @post.created_at.strftime("%B %d, %Y") %></p>
       </div>
   </div>
 </div>

@@ -4,8 +4,15 @@ class User < ApplicationRecord
   has_many :posts
   has_one_attached :profile_photo
 
+  followability
+
   validates :username, presence: true, uniqueness: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+
+  def unfollow(user)
+    followerable_relationships.where(followable_id: user.id).destroy_all
+  end
 end

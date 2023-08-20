@@ -70,8 +70,25 @@ body {
   overflow: hidden;
 }
 .main-content {
-  overflow: scroll;
+  overflow: auto;
 }
+
+/* Hide scrollbars for webkit-based browsers */
+.main-content::-webkit-scrollbar {
+  width: 0.5em;
+  background-color: transparent;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* For Firefox and other non-webkit browsers */
+.main-content {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
 .comment {
   display: flex;
   height: 100%;
@@ -134,7 +151,7 @@ body {
 }
 .modal {
   position: fixed;
-  z-index: 1;
+  z-index: 22222;
   padding: 2em;
 
   /* Centering */
@@ -163,9 +180,35 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: -1;
+  // z-index: -1;
 }
 
+.modal-overlay-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  // z-index: -1;
+}
+
+.modal-menu {
+  display: none;
+  position: fixed;
+  z-index: 22222;
+  padding: 2em;
+
+  /* Centering */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 5px;
+  /* Add the drop shadow */
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+}
 .cancel-button {
   background-color: #1530ff;
   font-size: 12px;

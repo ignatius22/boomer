@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user
+  before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
 
   def index
@@ -7,6 +8,9 @@ class PostsController < ApplicationController
     @users = User.all
     @post = current_user.posts.build
   end
+
+
+
 
   def show
     @post = Post.find(params[:id])
@@ -29,16 +33,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.redirect(user_post_path(@post.user, @post)) 
-      end
-      redirect_to user_post_path(@post.user, @post), notice: 'Post was successfully updated.'
+      redirect_to user_post_path(@user, @post), notice: 'Post was successfully updated.'
     else
       render :edit
     end
@@ -55,5 +54,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :description, :photo)
+  end
+
+  def set_post
+    @post = @user.posts.find(params[:id])
   end
 end
