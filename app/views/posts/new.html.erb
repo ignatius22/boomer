@@ -1,11 +1,14 @@
 <%= turbo_frame_tag "post_modal" do %>
-<div class="modal-overlay"></div>
-<div class="modal">
-    <h1>New Post</h1>
-    <%= render "form", post: @post %>
-    <br>
-  <div>
-    <%= link_to "Cancel", posts_path, class: "bg-slate-100 rounded px-4 py-2 text-center text-slate-700 font-medium hover:bg-slate-200 focus:ring-4 focus:ring-slate-100 no-underline inline-block", data: { turbo: false } %>
+ <div class="modal-overlay"></div>
+  <div class="modal flex-col">
+    <div class="flex border-b w-full justify-between items-center p-3">
+      <div></div>
+      <h1 class="font-bold text-sm">New Post</h1>
+      <%= link_to "X", posts_path, class: "text-center text-slate-700 font-medium focus:ring-4 focus:ring-slate-100 no-underline inline-block", data: { turbo: false } %>
+    </div>
+      
+      <div class="mt-10">
+        <%= render "form", post: @post %>
+      </div>
   </div>
-</div>
 <% end %>

@@ -1,31 +1,43 @@
 <%= turbo_frame_tag "post_modal" do %>
-    <div class="modal-overlay"></div>
-    <div class="modal">
-        <h1>Edit Post</h1>
-        <%= form_with(model: [@user, @post], url: user_post_path(@user,@post), local: true) do |form| %>
-            <div>
-                <%= form.text_field :title,  placeholder:"title" %>
-                <% @post.errors.full_messages_for(:title).each do |message| %>
-                <div><%= message %></div>
-                <% end %>
-            </div>
+ <div class="modal-overlay"></div>
+  <div class="modal flex-col">
+    <div class="flex border-b w-full justify-between items-center p-3">
+      <div></div>
+      <h1 class="font-bold text-sm">Edit Post</h1>
+      <%= link_to "X", posts_path, class: "text-center text-slate-700 font-medium focus:ring-4 focus:ring-slate-100 no-underline inline-block", data: { turbo: false } %>
+    </div>
+      
+      <div class="mt-10">
+        <%= form_with(model: [@user, @post], url: user_posts_path(@user,@post), local: true) do |form| %>
+        <div>
+            <%= form.text_field :title,  placeholder:"title", class:"input my-5" %>
+        </div>
 
             <div class="">
-                <%= form.text_area :description, placeholder:"description" %><br>
-                <%= form.label :photo %><br>
-                <%= form.file_field :photo %>
-                <% @post.errors.full_messages_for(:description).each do |message| %>
-                <div><%= message %></div>
-                <% end %>
+            <div class="flex-col">
+                <div>
+                <%= form.text_area :description, placeholder:"description", class:"input" %>
+                </div>
+                <div class="my-3">
+                <%= form.file_field :photo, class: "custom-file-input" %>
+                <%# <%= form.file_field :photo, class: "custom-file-input", id: "customFile" %> 
+                </div>
             </div>
 
             <div>
-                <%= form.submit %>
+                <%= form.submit class:"bg-red-300 w-full p-2 text-white text-xs font-bold" %>
             </div>
-            <% end %>
-          <div>
-            <%= link_to "Cancel", user_post_path, class: "bg-slate-100 rounded px-4 py-2 text-center text-slate-700 font-medium hover:bg-slate-200 focus:ring-4 focus:ring-slate-100 no-underline inline-block", data: { turbo: false } %>
-        </div>
-    </div>
-<% end %>
 
+            <div class="my-5">
+                <% @post.errors.full_messages_for(:description).each do |message| %>
+                <div class="font-light text-xs text-red-500"><%= message %></div>
+            <% end %>
+            <% @post.errors.full_messages_for(:title).each do |message| %>
+                <div class="font-light text-xs text-red-500"><%= message %></div>
+            <% end %>
+            </div>
+            </div>
+        <% end %>
+      </div>
+  </div>
+<% end %>
