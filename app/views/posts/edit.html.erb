@@ -2,7 +2,27 @@
     <div class="modal-overlay"></div>
     <div class="modal">
         <h1>Edit Post</h1>
-        <%= render "form", post: @post %>
+        <%= form_with(model: [@user, @post], url: user_post_path(@user,@post), local: true) do |form| %>
+            <div>
+                <%= form.text_field :title,  placeholder:"title" %>
+                <% @post.errors.full_messages_for(:title).each do |message| %>
+                <div><%= message %></div>
+                <% end %>
+            </div>
+
+            <div class="">
+                <%= form.text_area :description, placeholder:"description" %><br>
+                <%= form.label :photo %><br>
+                <%= form.file_field :photo %>
+                <% @post.errors.full_messages_for(:description).each do |message| %>
+                <div><%= message %></div>
+                <% end %>
+            </div>
+
+            <div>
+                <%= form.submit %>
+            </div>
+            <% end %>
           <div>
             <%= link_to "Cancel", user_post_path, class: "bg-slate-100 rounded px-4 py-2 text-center text-slate-700 font-medium hover:bg-slate-200 focus:ring-4 focus:ring-slate-100 no-underline inline-block", data: { turbo: false } %>
         </div>

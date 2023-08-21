@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_user
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: %i[edit update destroy]
   before_action :authenticate_user!
 
   def index
@@ -9,9 +9,6 @@ class PostsController < ApplicationController
     @post = current_user.posts.build
   end
 
-
-
-
   def show
     @post = Post.find(params[:id])
     @user = @post.user
@@ -19,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = current_user.posts.build
+    @post = @user.posts.build
   end
 
   def create
@@ -32,8 +29,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @post.update(post_params)
@@ -42,9 +38,6 @@ class PostsController < ApplicationController
       render :edit
     end
   end
-
-
-
 
   private
 
