@@ -1,58 +1,157 @@
+
+
+
+
+
+
+
+
+
+
 <div class="flex justify-between ">
-<%= render partial: 'sidebar' %>
+ <%= render partial: 'sidebar' %>
 
+  <div class="mx-10 my-10">
+    <h1 class="font-bold text-2xl" style="color: #003049;">Settings</h1>
+  </div>
   <div class="flex w-5/6 justify-between main-content">
-    <div class="flex-col mt-20" style=" height: 500px; width:100%;">
-      <div class="reg">
-        <div class="spacer"></div>
+    <div class="flex-col mt-20" style=" height: 100%; width:100%;">
+      <div class="flex justify-between my-10">
+        <div></div>
+          <div class="border flex" style="width: 60%; height:100%">
+            <div class="border" style="width: 30%;">
+              <div class="flex-col items-center w-full border-b p-2" >
+                <h1 class="font-bold text-center mt-10 text-2xl" style="color: #003049;">Boomer</h1>
+                <p class="font-light text-center text-sm">Update your account</p>
+              </div>
+              <div class="my-10">
+                <h3 class="text-center font-bold text-sm t">Cancel my account</h3>
+                <div class="text-center font-light text-xs my-5">Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"text-red-500 p-2" %></div>
+                <p class="text-center"><%= link_to "Back", :back, class:"font-light text-sm" %></p>
+              </div>
+            </div>
+            <div class="">
+              <div class="" style="width: 50%;">
+                <div class="my-5 ml-5">
+                  <h1 class="text-2xl font-semibold">Edit Profile</h1>
+                </div>
+                <div class="mx-10 ">
+                  <div class="flex justify-between" style="width: 40%;">
+                    <div class="rounded-full bg-slate-200" style="height: 30px; width:30px; ">
+                      <%= image_tag current_user.profile_photo, class: "h-full w-full rounded-full" if current_user.profile_photo.attached? %>
+                    </div>
+                    <div class="">
+                        <h1 class="font-bold ml-3.5"><%= current_user.username %></h1>
+                      </div>
+                    </div>
 
-          <div class="px-4 py-8 border w-1/5 ">
-          <h2 class="text-2xl p-y-4">Edit <%= resource_name.to_s.humanize %></h2>
-
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-              <%= render "devise/shared/error_messages", resource: resource %>
-
-              <div class="field py-4">
-                <%= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
               </div>
 
-              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-              <% end %>
+             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+               <%= render "devise/shared/error_messages", resource: resource %>
 
-              <div class="field py-2">
-                <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-                <%= f.password_field :password, autocomplete: "new-password" %>
-                <% if @minimum_password_length %>
-                  <br />
-                  <em><%= @minimum_password_length %> characters minimum</em>
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 90%;">
+                     <div class="" style="">
+                        <%= f.label :email, class:'text-sm font-bold' %>
+                     </div>
+                     <div class="">
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"input" %>
+                      </div>
+                    </div>
+                </div>
+
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <div class="font-light text-sm">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
                 <% end %>
-              </div>
 
-              <div class="field">
-                <%= f.label :password_confirmation %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-              </div>
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 90%;">
+                     <div class="flex-col" style="">
+                        <%= f.label :password, class:'text-sm font-bold' %>
+                        <p class="text-xs font-light">(leave blank if you don't want to change it)</p>
+                     </div>
+                     <div class="">
+                        <%= f.password_field :password, autocomplete: "new-password", class:"input" %>
+                        <% if @minimum_password_length %>
+                          <br />
+                          <em class="text-xs font-light"><%= @minimum_password_length %> characters minimum</em>
+                        <% end %>
+                      </div>
+                    </div>
+                </div>
 
-              <div class="field">
-                <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-                <%= f.password_field :current_password, autocomplete: "current-password" %>
-              </div>
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 90%;">
+                    <div class="" style="">
+                      <%= f.label :password_confirmation, class:"font-bold text-sm" %>
+                    </div>
+                    <div class="">
+                      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"input" %>
+                    </div>
+                  </div>
+                </div>
+ 
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 90%;">
+                    <div class="flex-col" style="">
+                      <%= f.label :current_password, class:"font-bold text-sm" %> 
+                      <p class="font-light text-xs" style="width: 90%;">(we need your current password to confirm your changes)</p>
+                    </div>
+                    <div class="">
+                      <%= f.password_field :current_password, autocomplete: "current-password",class:"input" %>
+                    </div>
+                  </div>
+                </div>
 
-              <div class="actions">
-                <%= f.submit "Update" %>
-              </div>
-            <% end %>
 
-            <h3>Cancel my account</h3>
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 90%;">
+                    <div class="" style="">
+                      <%= f.label :username, class:'text-sm text-slate-600 font-bold' %><br />
+                    </div>
+                    <div class="">
+                      <%= f.text_field :username, autofocus: true, autocomplete: "username", class:'input ' %> 
+                    </div>
+                  </div>
+                </div>
 
-            <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 90%;">
+                    <div class="" style="">
+                      <%= f.label :bio, class:'text-sm text-slate-600 font-bold' %><br />
+                    </div>
+                    <div class="">
+                      <%= f.text_area :bio, autofocus: true, autocomplete: "bio", class:'input ' %>
+                    </div>
+                  </div>
+                </div>
 
-            <%= link_to "Back", :back %>
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 90%;">
+                    <div class="" style="">
+                      <%= f.label :profile_photo, class:"text-sm font-bold" %>
+                    </div>
+                    <div class="">
+                      <%= f.file_field :profile_photo, class: 'input ' %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mx-10 my-5">
+                  <div class="flex justify-between items-center" style="width: 100%;">
+                    <div class="mt-10" style="width:100%; background-color:#003049; text-align:center;">
+                      <%= f.submit "Update", class:"text-white text-sm font-light p-2" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <div></div>
       </div>
+     
     </div>
   </div>
 </div>
