@@ -1,0 +1,53 @@
+<%= form_with(model: [@user, @product], local: true, html: { multipart: true }) do |form| %>
+    <div class="mx-10 my-5">
+        <div class="flex justify-between items-center" style="width: 90%;">
+            <div class="flex-col" style="">
+            <%= form.label :title, class:'text-sm font-bold' %>
+            </div>
+            <div class="">
+            <%= form.text_field :title, class:"input" %>
+            </div>
+        </div>
+    </div>
+
+    <div class="mx-10 my-5">
+        <div class="flex justify-between items-center" style="width: 90%;">
+        <div class="" style="">
+            <%= form.label :description, class:"font-bold text-sm" %>
+        </div>
+        <div class="">
+            <%= form.text_area :description,  class:"input" %>
+        </div>
+        </div>
+    </div>
+
+    <div class="mx-10 my-5">
+        <div class="flex justify-between items-center" style="width: 90%;">
+        <div class="flex-col" style="">
+            <%= form.label :price,class:"font-bold text-sm"  %>
+        </div>
+        <div class="">
+            <%= form.number_field :price, step: '0.01',class:"input" %>
+        </div>
+        </div>
+    </div>
+    <div class="mx-10 my-5">
+        <div class="flex justify-between items-center" style="width: 90%;">
+        <div class="" style="">
+            <%= form.label :image, class:'text-sm text-slate-600 font-bold' %>
+        </div>
+        <div class="">
+            <%= form.file_field :image , class: 'input ' %> 
+        </div>
+        </div>
+    </div>
+    <div class="mx-10 my-5">
+        <div class="flex justify-between items-center" style="width: 100%;">
+        <div class="mt-10" style="width:100%; background-color:#003049; text-align:center;">
+            <%= form.submit "Create", class:"text-white text-sm font-light p-2" %>
+        </div>
+        </div>
+    </div>
+<% end %>
+
+

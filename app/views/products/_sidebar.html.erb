@@ -5,28 +5,18 @@
       </div>
       <div class="flex-col justify-between h-3/5 mx-10 my-10" style="">
         <div class="h-1/6 flex items-center">
-          <%= icon('fa-solid', 'pen-to-square', class: 'icon')%>
-          <%= turbo_frame_tag "post_modal" do %>
-            <%= link_to "Create", new_user_post_path(current_user), class:"text-sm ml-3" %>
-          <% end %>
-        </div>
-        <div class="h-1/6 flex items-center">
            <%= icon('fa-solid', 'house', class: 'icon')%>
            <%= link_to 'Home', posts_path, class:"text-sm ml-3" %>
         </div>
         <div class="h-1/6 flex items-center">
           <%= icon('fa-solid', 'shop', class: 'icon')%>
-          <%= link_to 'Market', user_products_path(current_user), class:"text-sm ml-3" %>
+          <%= link_to 'Sell', new_user_product_path(current_user), class:"text-sm ml-3" %>
         </div>
         <div class="h-1/6 flex items-center">
-          <%= icon('fa-solid', 'envelope', class: 'icon')%>
-          <p class="text-sm ml-3">Messages</p>
-          
+          <%= icon('fa-solid', 'tag', class: 'icon')%>
+            <%= link_to 'Buy', user_products_path, class:"text-sm ml-3" %>
         </div>
-        <div class="flex h-1/6 items-center">
-          <%= icon('fa-solid', 'heart', class: 'icon')%>
-          <p class="text-sm ml-3">Notification</p>
-        </div>
+
         <div class="flex h-1/6 items-center">
           <%= image_tag current_user.profile_photo, class: "h-8 w-8 rounded-full" if current_user.profile_photo.attached? %>
           <%= link_to 'Profile', user_path(current_user), class:'text-sm ml-3' %>

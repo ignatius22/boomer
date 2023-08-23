@@ -1,0 +1,36 @@
+<div class="flex justify-between ">
+ <%= render partial: 'sidebar' %>
+  <div class="flex w-5/6 justify-between main-content">
+        <div class="flex-col mt-20" style="margin-left: 25%; height: 47%; width:100%;">
+        <h1>Today's picks</h1>
+        <% if @products.any? %>
+          <div class="flex flex-wrap justify-between mt-20" style="width: 850px; height:100%;">
+              <% @products.each do |product| %>
+              
+                <div class="border" style="width:280px; height:300px">
+                  <%= image_tag product.image, class: "h-3/5 w-full border-b-4"  if product.image.attached? %>
+                  <div class="my-2 p-2 ">
+                    <h1 class="font-bold text-sm"><%= product.title %></h1>
+                    <p class="font-light text-sm"><%= product.description %></p>
+                    <p><%= number_to_currency(product.price) %></p>
+                    <div class="border-x flex justify-between mt-2">
+                      <%= link_to "View Details", user_product_path(@user, product), class:"font-light text-xs border p-1" %>
+                      <%= link_to "Add to cart", user_product_path(@user, product), class:"font-light text-xs border p-1" %>
+
+                    </div>
+                  </div>
+                </div>
+              
+              <% end %>
+          </div>
+        <% else %>
+            <p>No other products from <%= @user.username %> yet.</p>
+        <% end %>
+        </div>
+
+
+      <div class="w-1/4 justify-self-center text-center">
+        <p class="text-xs font-light text-slate-300">Posted by: <%= link_to @user.username, user_path(@user) %></p>
+      </div>
+  </div>
+</div>

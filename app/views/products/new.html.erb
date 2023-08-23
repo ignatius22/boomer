@@ -1,0 +1,48 @@
+<!-- app/views/products/new.html.erb --> 
+<div class="flex justify-between ">
+ <%= render partial: 'sidebar' %>
+
+  <div class="mx-10 my-10">
+    <h1 class="font-bold text-2xl" style="color: #003049;">New Product</h1>
+  </div>
+  <div class="flex w-5/6 justify-between main-content">
+    <div class="flex-col mt-20" style=" height: 100%; width:100%;">
+      <div class="flex justify-between my-10">
+        <div></div>
+          <div class="border flex" style="width: 60%; height:100%">
+            <div class="border" style="width: 30%;">
+              <div class="flex-col items-center w-full border-b p-2" >
+                <h1 class="font-bold text-center mt-10 text-2xl" style="color: #003049;">Boomer</h1>
+                <p class="font-light text-center text-sm">New Product</p>
+              </div>
+              <div class="my-10">
+                <p class="text-center"><%= link_to 'Back', user_products_path(@user), class:"font-light text-sm" %></p>
+              </div>
+            </div>
+            <div class="">
+              <div class="" style="width: 50%;">
+                <div class="my-5 ml-5">
+                  <h1 class="text-2xl font-semibold">Create Your Product</h1>
+                </div>
+                <div class="mx-10 ">
+                  <div class="flex justify-between" style="width: 40%;">
+                    <div class="rounded-full bg-slate-200" style="height: 30px; width:30px; ">
+                      <%= image_tag current_user.profile_photo, class: "h-full w-full rounded-full" if current_user.profile_photo.attached? %>
+                    </div>
+                    <div class="">
+                        <h1 class="font-bold ml-3.5"><%= current_user.username %></h1>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+
+            <%= render 'form' %>
+            </div>
+          </div>
+        <div></div>
+      </div>
+     
+    </div>
+  </div>
+</div>
