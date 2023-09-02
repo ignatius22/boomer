@@ -18,4 +18,9 @@ Rails.application.routes.draw do
     resources :likes, module: :posts
     resources :comments
   end
+
+  resources :cart, only: [:show] do
+    post 'add_to_cart', on: :member
+    delete 'remove_from_cart', on: :member
+  end
 end

@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_product, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: [:add_to_cart]
   before_action :set_user
 
   def index
@@ -40,14 +41,27 @@ class ProductsController < ApplicationController
     redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
+  def add_to_cart
+    product = Product.find(params[:product_id])
+    if current_user.cart_items.find_by(product:)
+      flash[:notice] = 'Product is already in your cart.'
+    else
+      current_user.cart_items.create(product:, quantity: 1)
+      flash[:notice] = 'Product added to cart.'
+    end
+    redirect_to products_path
+  end
+
   private
 
   def set_product
     @product = Product.find(params[:id])
   end
+
   def set_user
     @user = User.find(params[:user_id])
   end
+
   def product_params
     params.require(:product).permit(:title, :description, :price, :image)
   end
