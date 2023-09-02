@@ -61,9 +61,8 @@
 
                 </a>
                 <div class="flex items-center">
-                  <%= button_to post_like_path(post), method: :patch, class: 'like-button' do %>
                     <%= icon('fa-solid', 'heart', class: 'icon heart px-2') %>
-                  <% end %>
+                 
              
                   <p class="text-xs">
                      <%= post.likes_count%>
