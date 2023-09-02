@@ -1,0 +1,50 @@
+<%= turbo_page_requires_reload %>
+<div class="flex justify-between ">
+ <%= render partial: 'sidebar' %>
+  <div class="flex w-5/6 justify-between main-content">
+     <div class="flex-col mt-20" style="margin-left: 25%; height: 47%; width:100%;">
+         <div class="flex" style=" height: 100%; width:100%;">
+            <div class="border p-4 " style="width:500px" >
+            <div class="">
+                <%= image_tag @product.image, class:"showpost" if @product.image.attached?  %>
+            </div>
+                <h1 class="text-sm font-bold"><%= @product.title %></h1>
+                <p class="text-sm font-light"><%= @product.description %></p>
+              </div>
+              <div class="border" style="width:350px; height:92%">
+              <div class="flex justify-between items-center border-b p-1">
+                <div class="flex items-center ">
+                  <%= image_tag @user.profile_photo, class: "w-9 h-9 rounded-full" if @user.profile_photo.attached? %>
+                  <span class="text-sm font-bold ml-2"><%= @user.username %></span>
+                </div>
+                
+                <% if @user.id == current_user.id %>
+                  <%= turbo_frame_tag "post_modal" do %>
+                    <%= link_to edit_user_product_path(user_id: @product.user, id: @product) do %>
+                        <%= icon('fa-solid', 'ellipsis', class: 'icon')%>
+                    <%end%>
+                  <%end%>
+                <% end %>
+                
+
+              </div>
+              
+               <div class="comment">
+
+               </div>
+
+              </div>
+          </div>
+
+          <div class="mt-10 border-b" style="width: 850px;"></div>
+          <div class="mt-10 text-2xl"> <h2>Other Product by <%= @user.username %>:</h2></div>
+
+          </div>
+
+
+      <div class="w-1/4 justify-self-center text-center">
+        <p class="text-xs font-light text-slate-300">Posted by: <%= link_to @user.username, user_path(@user) %></p>
+        <p class="text-xs font-light text-slate-300">Posted on: <%= @product.created_at.strftime("%B %d, %Y") %></p>
+      </div>
+  </div>
+</div>

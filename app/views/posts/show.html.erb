@@ -43,6 +43,7 @@
 
           <div class="mt-10 border-b" style="width: 850px;"></div>
           <div class="mt-10 text-2xl"> <h2>Other Posts by <%= @user.username %>:</h2></div>
+          <%= render partial:"likes", locals: {post: @post} %>
       <% if @other_posts.any? %>
           <div class="flex flex-wrap justify-between mt-20" style="width: 850px; height:100%;">
               <% @other_posts.each do |other_post| %> 

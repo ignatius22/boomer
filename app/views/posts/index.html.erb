@@ -54,10 +54,24 @@
               </div>
 
               <div class="reactions">
-                <a href="/posts/<%= post.id %>">
-                  <%= icon('fa-solid', 'comment', class: 'icon')%>
+                <a class="flex items-center justify-between" href="/posts/<%= post.id %>">
+                  <%= icon('fa-solid', 'comment', class: 'icon px-1')%>
+                  <p class="text-xs font-light px-2"><%= post.comments.count %></p>
+                  <%# <%= render partial:"likes", locals: {post: post} %> 
+
                 </a>
-                <%= icon('fa-solid', 'heart', class: 'icon heart')%>
+                <div class="flex items-center">
+                  <%= button_to post_like_path(post), method: :patch, class: 'like-button' do %>
+                    <%= icon('fa-solid', 'heart', class: 'icon heart px-2') %>
+                  <% end %>
+             
+                  <p class="text-xs">
+                     <%= post.likes_count%>
+                  </p>
+                 
+                </div>
+           
+
               </div>
 
               <div class="mt-2">

@@ -1,0 +1,6 @@
+
+<%= button_to post_like_path(@post), method: :patch do %>
+  <%= icon('fa-solid', 'heart', class: 'icon heart px-2') %>
+<% end %>
+
+<%= post.likes_count%>
