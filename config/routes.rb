@@ -1,26 +1,36 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  post 'connections/:id/follow', to: 'connections#follow', as: 'follow'
-  post 'connections/:id/unfollow', to: 'connections#unfollow', as: 'unfollow'
-  post 'connections/:id/accept', to: 'connections#accept', as: 'accept'
-  post 'connections/:id/decline', to: 'connections#decline', as: 'decline'
-  post 'connections/:id/cancel', to: 'connections#cancel', as: 'cancel'
+  # Connections
+  resources :connections, only: [] do
+    member do
+      post 'follow'
+      post 'unfollow'
+      post 'accept'
+      post 'decline'
+      post 'cancel'
+    end
+  end
 
-  root to: 'posts#index'
-  # resources :users, only: [:show]
-  resources :users do
+  # Users
+  resources :users, only: [:show] do
     resources :posts
     resources :products
   end
 
+  # Posts
   resources :posts do
     resources :likes, module: :posts
     resources :comments
   end
 
-  resources :cart, only: [:show] do
-    post 'add_to_cart', on: :member
-    delete 'remove_from_cart', on: :member
+  # Cart
+  resource :cart, only: [:show] do
+    member do
+      post 'add_to_cart'
+      delete 'remove_from_cart'
+    end
   end
+
+  root to: 'posts#index'
 end

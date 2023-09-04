@@ -114,7 +114,7 @@
                     </div>
                     <div class="text-sm font-bold pl-2"><%=user.username %></div>
                   </div>
-                    <%= button_to "Follow",  follow_path(user), class:"bg-green-300 text-white font-light text-xs rounded w-16 h-8 p-1" %>
+                    <%= button_to "Follow",  follow_connection_path(user), class:"bg-green-300 text-white font-light text-xs rounded w-16 h-8 p-1" %>
                 </div>
               <% end %>
             <% end %>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="text-sm font-bold pl-2"><%=user.username %></div>
                   </div>
-                    <%= button_to "Unfollow",  unfollow_path(user), class:"bg-red-300 text-white font-light text-xs rounded w-16 h-8 p-1" %>
+                    <%= button_to "Unfollow",  unfollow_connection_path(user), class:"bg-red-300 text-white font-light text-xs rounded w-16 h-8 p-1" %>
                 </div>
               <% end %>
          </div>
@@ -155,8 +155,8 @@
           <p class="text-xs font-light text-left"><strong><%= request.followerable.username %></strong> wants to follow you</p>
         </div>
         <div class="flex items-center mt-2">
-          <%= button_to "Accept", accept_path(request.followerable), class:"bg-green-300 text-white font-light font-xs rounded w-16 h-8 p-1" %>
-          <%= button_to "Decline", decline_path(request.followerable), class:"bg-red-300 text-white font-light fonts-xs rounded w-16 h-8 p-1 ml-4" %>
+          <%= button_to "Accept", accept_connection_path(request.followerable), class:"bg-green-300 text-white font-light font-xs rounded w-16 h-8 p-1" %>
+          <%= button_to "Decline", decline_connection_path(request.followerable), class:"bg-red-300 text-white font-light fonts-xs rounded w-16 h-8 p-1 ml-4" %>
         </div>
       </div>
       <% end %>
