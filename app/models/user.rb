@@ -5,9 +5,7 @@ class User < ApplicationRecord
   has_many :products
   has_one_attached :profile_photo
   has_many :likes
-  has_one :cart
-  has_many :cart_items, through: :cart
-
+  has_many :cart_items
   
   followability
 

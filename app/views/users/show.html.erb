@@ -21,11 +21,11 @@
 
                 <div class="ml-5 ">
                   <% if current_user.following?(@user) %>
-                    <%= button_to "Unfollow", unfollow_path(@user), class:"rounded bg-sky-200 py-1 px-2 font-bold text-sm text-white" %>
+                    <%= button_to "Unfollow", unfollow_connection_path(@user), class:"rounded bg-sky-200 py-1 px-2 font-bold text-sm text-white" %>
                   <% elsif current_user.sent_follow_request_to?(@user)%>
                     <%= button_to "Cancel follow request", cancel_connection_path(@user) , class:"rounded bg-red-200 py-1 px-2 font-bold text-sm text-whit" %>
                   <% else %>
-                    <%= button_to "Follow",  follow_path(@user) , class:"rounded bg-sky-200 py-1 px-2 font-bold text-sm text-white" %>
+                    <%= button_to "Follow",  follow_connection_path(@user) , class:"rounded bg-sky-200 py-1 px-2 font-bold text-sm text-white" %>
                   <% end %>
                 </div>
               <% end %>
