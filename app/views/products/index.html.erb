@@ -15,7 +15,7 @@
                     <p><%= number_to_currency(product.price) %></p>
                     <div class="border-x flex justify-between mt-2">
                       <%= link_to "View Details", user_product_path(@user, product), class:"font-light text-xs border p-1" %>
-                      <%= link_to "Add to cart", add_to_cart_cart_path(@user, product), class:"font-light text-xs border p-1" %>
+                      <%= link_to "Add to cart", user_product_path(@user, product), class:"font-light text-xs border p-1" %>
 
                     </div>
                   </div>
