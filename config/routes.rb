@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resource :cart, only: [:show] do
-    post 'add', on: :member
-    post 'remove', on: :member
-  end
+  # resource :cart, only: [:show] do
+  #   post 'add', on: :member
+  #   post 'remove', on: :member
+  # end
+  get 'cart', to: 'cart#show'
+  post 'cart/add'
+  post 'cart/remove'
 
+  
   resources :connections, only: [] do
     member do
       post 'follow', 'unfollow', 'accept', 'decline', 'cancel'
