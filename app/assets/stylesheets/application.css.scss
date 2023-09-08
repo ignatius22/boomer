@@ -136,13 +136,13 @@ body {
 //   bottom: 0;
 
 // }
-.reactions{
+.reactions {
   padding-top: 3%;
   display: flex;
   width: 8%;
   justify-content: space-between;
 }
-.reactions .heart{
+.reactions .heart {
   color: #ff1515;
 }
 .custom-text-area:focus {
@@ -168,7 +168,7 @@ body {
   width: 100%;
   object-fit: cover;
 }
-.post-image{
+.post-image {
   height: 400px;
   width: 100%;
   object-fit: cover;
@@ -229,6 +229,13 @@ body {
   border: none;
 }
 
+.cart-counter {
+  position: absolute;
+  top: 1.98%;
+  right: 11.6%;
+  z-index: 2222;
+  color: #ffd700;
+}
 
 @media only screen and (max-width: 770px) {
   .reg {
