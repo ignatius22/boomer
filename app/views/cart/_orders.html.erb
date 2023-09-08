@@ -1,24 +1,110 @@
-<% @cart.orders.each do |order| %>
-  <% product = order.product %>
-  <div id="<%= "cart-#{product.id}" %>">
-    <div style="display:flex;justify-content:space-between;margin: 0em 5em;">
-      <strong>Name:</strong>
-      <%= product.title %>
-      <strong>Description:</strong>
-      <%= product.description %>
-      <strong>Price:</strong>
-      <%= product.price %>
-      <%= form_with(url: cart_add_path) do |f| %>
-        <%= f.hidden_field :id, value: product.id %>
-        <%= f.number_field :quantity, value: order.quantity, min: 0 %>
-        <%= f.submit "Add To Cart" %>
-      <% end %>
-      <%= form_with(url: cart_remove_path) do |f| %>
-        <%= f.hidden_field :id, value: order.id %>
-        <%= f.submit "X" %>
-      <% end %>
-      <strong>Total:</strong>
-      <%= order.total %>
-    </div>
+<div class="card border p-5" style="width: 80%; margin-left:10%; background-color:#FFFFFF;">
+  <div class="border-b" style="width: 80%;">
+    Cart ( <%= @cart.orders.count %> )
   </div>
-<% end %>
+
+  <div class="flex justify-around" >
+    <div style="width: 80%;">
+      <% @cart.orders.each do |order| %>
+        <% product = order.product %>
+        <div class="" id="<%= "cart-#{product.id}" %>">
+          <div class="border mt-2 p-5 " style="width: 80%;">
+            <div class="flex-col content-between">
+              <div class="flex justify-between">
+                <div class="left flex">
+                  <div style="width: 200px;">
+                    <%= image_tag product.image, class:"" if product.image.attached?  %>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-bold"><%= product.title %></p> 
+                    <p><%= product.description %></p>
+                  </div>
+                </div>
+                <div class="right">
+                  <%= number_to_currency(product.price)%>
+                </div>
+              </div>
+              <div class="mt-20 flex justify-between" style="width: 100%;">
+                <div>
+                  <%= form_tag(cart_remove_path, method: :delete) do %>
+                    <%= hidden_field_tag :id, order.id %>
+                    <%= button_tag(type: 'submit', class: 'icon-button') do %>
+                      <%= icon('fa-solid', 'trash', class: 'icon') %>
+                    <% end %>
+                  <% end %>
+                </div>
+
+                <div class="flex items-center">
+                  <div>
+                    <%= form_tag(cart_remove_path, method: :delete) do %>
+                      <%= hidden_field_tag :id, product.id %>
+                      <%= button_tag(type: 'submit', class: 'icon-button') do %>
+                        <%= icon('fa-solid', 'minus', class: 'icon') %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div class="px-2">
+                    <%= order.quantity %>
+                  </div>
+                  <div>
+                    <%= form_tag(cart_add_path, method: :post) do %>
+                      <%= hidden_field_tag :id, product.id %>
+                      <%= button_tag(type: 'submit', class: 'icon-button') do %>
+                        <%= icon('fa-solid', 'plus', class: 'icon') %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="border p-5 mt-2" style="width: 20%; height:250px; ">
+      <div class="border-b">
+        <p class="font-medium">Order Summary</p>
+      </div>
+
+      <div class="flex justify-between mt-5">
+        <div>
+          <p class="font-bold">Total:</p>
+        </div>
+        <div>
+          <%= number_to_currency(@cart.total) %>
+        </div>
+      </div>
+      <div class="flex justify-between mt-5">
+        <div>
+          <p class="font-bold">Shipping:</p>
+        </div>
+        <div>
+          <%= number_to_currency(0) %>
+        </div>
+      </div>
+      <div class="flex justify-between mt-5">
+        <div>
+          <p class="font-bold">Tax:</p>
+        </div>
+        <div>
+          <%= number_to_currency(0) %>
+        </div>
+      </div>
+      <div class="border-b py-1">
+      </div>
+      <div class="flex justify-between mt-5">
+        <div>
+          <p class="font-bold">Total:</p>
+        </div>
+        <div>
+          <%= number_to_currency(@cart.total) %>
+        </div>
+      </div>
+      <div class="mt-5">
+        <%= link_to "Checkout", new_user_product_path(@cart), class:"text-white text-sm font-light p-2" %>
+      </div>
+    </div>
+
+  </div>
+</div>

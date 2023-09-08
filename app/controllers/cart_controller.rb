@@ -1,6 +1,7 @@
 class CartController < ApplicationController
   def show
     @render_cart = false
+    
   end
 
   def add
@@ -13,7 +14,7 @@ class CartController < ApplicationController
       current_order.destroy
     else
       @cart.orders.create(product: @product, quantity:)
-      
+
     end
 
 
